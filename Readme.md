@@ -56,12 +56,12 @@ Better pay for upgrades. Adjusted the price of some payable upgrade objects in t
 | 3     | Wall                     | 2             | 20         |
 | 4     | Wall -                   | -             | -          |
 | 5     | Wall                     | 3             | 30         |
-| 0     | Castle                   | 3             | -          |
-| 1     | Castle -                 | -             | -          |
+| 0     | Castle                   | 3             | 10         |
+| 1     | Castle                   | 3             | 10         |
 | 2     | Castle                   | 4             | 20         |
 | 3     | Castle                   | 4             | 20         |
-| 4     | Castle -                 | -             | -          |
-| 5     | Castle -                 | -             | -          |
+| 4     | Castle                   | 4             | 20         |
+| 5     | Castle                   | 5             | 30         |
 | 6     | Castle                   | 5             | 30         |
 | 7     | Castle                   | 5             | 30         |
 | -     | Citizen Home Recruitment | 5 => 3        | -          |

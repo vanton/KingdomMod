@@ -229,13 +229,13 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
             { GamePrefabID.Wall0, new ModifyData(1, 10, GamePrefabID.Wall2) },
 
             { GamePrefabID.Castle7, new ModifyData(5, 30) },
-            { GamePrefabID.Castle6, new ModifyData(5, 30, GamePrefabID.Invalid, GamePrefabID.Castle3) },
+            { GamePrefabID.Castle6, new ModifyData(5, 30) },
             { GamePrefabID.Castle5, new ModifyData(5, 30) },
             { GamePrefabID.Castle4, new ModifyData(4, 20) },
-            { GamePrefabID.Castle3, new ModifyData(4, 20, GamePrefabID.Castle6 ) },
-            { GamePrefabID.Castle2, new ModifyData(4, 20, GamePrefabID.Invalid, GamePrefabID.Castle0) },
+            { GamePrefabID.Castle3, new ModifyData(4, 20) },
+            { GamePrefabID.Castle2, new ModifyData(4, 20) },
             { GamePrefabID.Castle1, new ModifyData(3, 10) },
-            { GamePrefabID.Castle0, new ModifyData(3, 10, GamePrefabID.Castle2) },
+            { GamePrefabID.Castle0, new ModifyData(3, 10) },
         };
 
         var prefab = go.GetComponent<PrefabID>();
