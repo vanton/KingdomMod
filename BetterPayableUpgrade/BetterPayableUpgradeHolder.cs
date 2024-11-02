@@ -17,7 +17,7 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
 {
     public static BetterPayableUpgradeHolder Instance { get; private set; }
     private static ManualLogSource log;
-    private static System.Collections.Generic.Dictionary<GamePrefabID, ModifyData> _modifyDataDict;
+    private static Dictionary<GamePrefabID, ModifyData> _modifyDataDict;
 
     public class Patcher
     {
@@ -83,7 +83,7 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
         log.LogMessage($"{this.GetType().Name} Start.");
 
         Patcher.PatchAll();
-        Game.OnGameStart += (Action)OnGameStart;
+        Game.OnGameStart += OnGameStart;
     }
 
     private void Update()
@@ -107,15 +107,15 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
 
         AdjustCosts();
     }
-        
+
     public void AdjustCosts()
     {
         var prefabs = Managers.Inst.prefabs;
         if (prefabs != null)
         {
             log.LogDebug("Handle prefabs start.");
-            
-            var prefabIds = new System.Collections.Generic.List<GamePrefabID>
+
+            var prefabIds = new List<GamePrefabID>
             {
                 GamePrefabID.Citizen_House,
                 GamePrefabID.Workshop,
@@ -126,7 +126,13 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
                 GamePrefabID.Tower3,
                 GamePrefabID.Tower2,
                 GamePrefabID.Tower1,
-                GamePrefabID.Tower0
+                GamePrefabID.Tower0,
+                GamePrefabID.Wall5,
+                GamePrefabID.Wall4,
+                GamePrefabID.Wall3,
+                GamePrefabID.Wall2,
+                GamePrefabID.Wall1,
+                GamePrefabID.Wall0
             };
 
             foreach (var prefabId in prefabIds)
@@ -134,10 +140,10 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
                 if (prefabId == GamePrefabID.MerchantHouse) continue;
                 var go = prefabs.GetPrefabById((int)prefabId);
                 if (go == null) continue;
-            
+
                 HandlePayable(go, true);
             }
-            
+
             log.LogDebug("Handle prefabs end.");
         }
 
@@ -166,8 +172,7 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
         var payables = SingletonMonoBehaviour<Managers>.Inst.payables;
         if (payables != null)
         {
-            foreach (var obj in payables.AllPayables
-                    )
+            foreach (var obj in payables.AllPayables)
             {
                 if (obj == null) continue;
                 var go = obj.gameObject;
@@ -192,18 +197,25 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
 
     private static void HandlePayable(GameObject go, bool isPrefab, bool modifyBuildPoints = true)
     {
-        _modifyDataDict ??= new System.Collections.Generic.Dictionary<GamePrefabID, ModifyData>
+        _modifyDataDict ??= new Dictionary<GamePrefabID, ModifyData>
         {
             { GamePrefabID.Citizen_House, new ModifyData(3) },
             { GamePrefabID.Workshop, new ModifyData(3) },
             { GamePrefabID.Tower_Baker, new ModifyData(2) },
-            { GamePrefabID.Tower6, new ModifyData(16, 120) },
-            { GamePrefabID.Tower5, new ModifyData(12, 80, GamePrefabID.Invalid, GamePrefabID.Tower3) },
-            { GamePrefabID.Tower4, new ModifyData(8, 70) },
-            { GamePrefabID.Tower3, new ModifyData(8, 50, GamePrefabID.Tower5) },
-            { GamePrefabID.Tower2, new ModifyData(5, 30, GamePrefabID.Invalid, GamePrefabID.Tower0) },
-            { GamePrefabID.Tower1, new ModifyData(4, 20) },
+            { GamePrefabID.Tower6, new ModifyData(4, 30) },
+            { GamePrefabID.Tower5, new ModifyData(4, 30, GamePrefabID.Invalid, GamePrefabID.Tower3) },
+            { GamePrefabID.Tower4, new ModifyData(3, 20) },
+            { GamePrefabID.Tower3, new ModifyData(3, 20, GamePrefabID.Tower5) },
+            { GamePrefabID.Tower2, new ModifyData(3, 20, GamePrefabID.Invalid, GamePrefabID.Tower0) },
+            { GamePrefabID.Tower1, new ModifyData(2, 10) },
             { GamePrefabID.Tower0, new ModifyData(2, 10, GamePrefabID.Tower2) },
+
+            { GamePrefabID.Wall5, new ModifyData(3, 30, GamePrefabID.Invalid, GamePrefabID.Wall3) },
+            { GamePrefabID.Wall4, new ModifyData(3, 30) },
+            { GamePrefabID.Wall3, new ModifyData(2, 20, GamePrefabID.Wall5) },
+            { GamePrefabID.Wall2, new ModifyData(2, 20, GamePrefabID.Invalid, GamePrefabID.Wall0) },
+            { GamePrefabID.Wall1, new ModifyData(1, 10) },
+            { GamePrefabID.Wall0, new ModifyData(1, 10, GamePrefabID.Wall2) },
         };
 
         var prefab = go.GetComponent<PrefabID>();
@@ -214,39 +226,39 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
         switch (prefabId)
         {
             case GamePrefabID.Citizen_House:
-            {
-                var payable = go.GetComponent<CitizenHousePayable>();
-                if (payable != null)
                 {
-                    log.LogDebug($"Change {go.name} price from {payable.Price} to 3");
-                    payable.Price = 3;
-                }
-                break;
-            }
-            case GamePrefabID.Workshop:
-            {
-                var payableWorkshop = go.GetComponent<PayableWorkshop>();
-                if (payableWorkshop != null)
-                {
-                    var payable = payableWorkshop.barrelCounterpart;
+                    var payable = go.GetComponent<CitizenHousePayable>();
                     if (payable != null)
                     {
                         log.LogDebug($"Change {go.name} price from {payable.Price} to 3");
                         payable.Price = 3;
                     }
+                    break;
                 }
-                break;
-            }
-            case GamePrefabID.Tower_Baker:
-            {
-                var payable = go.GetComponent<PayableShop>();
-                if (payable != null)
+            case GamePrefabID.Workshop:
                 {
-                    log.LogDebug($"Change {go.name} price from {payable.Price} to 2");
-                    payable.Price = 2;
+                    var payableWorkshop = go.GetComponent<PayableWorkshop>();
+                    if (payableWorkshop != null)
+                    {
+                        var payable = payableWorkshop.barrelCounterpart;
+                        if (payable != null)
+                        {
+                            log.LogDebug($"Change {go.name} price from {payable.Price} to 3");
+                            payable.Price = 3;
+                        }
+                    }
+                    break;
                 }
-                break;
-            }
+            case GamePrefabID.Tower_Baker:
+                {
+                    var payable = go.GetComponent<PayableShop>();
+                    if (payable != null)
+                    {
+                        log.LogDebug($"Change {go.name} price from {payable.Price} to 2");
+                        payable.Price = 2;
+                    }
+                    break;
+                }
             case GamePrefabID.Tower6:
             case GamePrefabID.Tower5:
             case GamePrefabID.Tower4:
@@ -254,6 +266,12 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
             case GamePrefabID.Tower2:
             case GamePrefabID.Tower1:
             case GamePrefabID.Tower0:
+            case GamePrefabID.Wall5:
+            case GamePrefabID.Wall4:
+            case GamePrefabID.Wall3:
+            case GamePrefabID.Wall2:
+            case GamePrefabID.Wall1:
+            case GamePrefabID.Wall0:
                 HandleTower(go, prefabId, isPrefab, modifyBuildPoints);
                 break;
         }
@@ -296,16 +314,11 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
         }
     }
 
-    public struct ModifyData
+    public struct ModifyData(int price, int buildPoints = 0, GamePrefabID nextPrefab = GamePrefabID.Invalid, GamePrefabID lastPrefab = GamePrefabID.Invalid)
     {
-        public int Price;
-        public int BuildPoints;
-        public GamePrefabID NextPrefab;
-        public GamePrefabID LastPrefab;
-
-        public ModifyData(int price, int buildPoints = 0, GamePrefabID nextPrefab = GamePrefabID.Invalid, GamePrefabID lastPrefab = GamePrefabID.Invalid)
-        {
-            Price = price; BuildPoints = buildPoints; NextPrefab = nextPrefab; LastPrefab = lastPrefab;
-        }
+        public int Price = price;
+        public int BuildPoints = buildPoints;
+        public GamePrefabID NextPrefab = nextPrefab;
+        public GamePrefabID LastPrefab = lastPrefab;
     }
 }

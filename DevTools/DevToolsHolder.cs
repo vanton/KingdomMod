@@ -16,8 +16,9 @@ public class DevToolsHolder : MonoBehaviour
 {
     public static DevToolsHolder Instance { get; private set; }
     private static ManualLogSource log;
-    private bool enabledDebugInfo =false;
+    private bool enabledDebugInfo = false;
     private bool enabledObjectsInfo = false;
+    private bool enabledDevTools = false;
     private readonly GUIStyle guiStyle = new();
     private int tick = 0;
     private readonly List<ObjectsInfo> objectsInfoList = new();
@@ -68,14 +69,14 @@ public class DevToolsHolder : MonoBehaviour
         }
 
 #if DEBUG
-            [HarmonyPatch(typeof(UnityEngine.Debug), "get_isDebugBuild")]
-            public class DebugIsDebugBuildPatcher
+        [HarmonyPatch(typeof(UnityEngine.Debug), "get_isDebugBuild")]
+        public class DebugIsDebugBuildPatcher
+        {
+            public static void Postfix(ref bool __result)
             {
-                public static void Postfix(ref bool __result)
-                {
-                    __result = true;
-                }
+                __result = true;
             }
+        }
 #endif
 
         // [HarmonyPatch(typeof(UnityEngine.DebugLogHandler), nameof(DebugLogHandler.Internal_Log))]
@@ -188,7 +189,7 @@ public class DevToolsHolder : MonoBehaviour
 
     private void Update()
     {
-// #if DEBUG
+        // #if DEBUG
         if (Input.GetKeyDown(KeyCode.Home))
         {
             log.LogMessage("Home key pressed.");
@@ -373,31 +374,39 @@ public class DevToolsHolder : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F9))
         {
             log.LogMessage($"F9 key pressed.");
+            enabledDevTools = !enabledDevTools;
 
             var array = Resources.FindObjectsOfTypeAll<Transform>();
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i].name == "DebugTools")
                 {
-                    array[i].gameObject.SetActive(true);
-                    var componentsInChildren = array[i].gameObject.GetComponentsInChildren<UnityEngine.UI.Text>(true);
-                    for (int j = 0; j < componentsInChildren.Length; j++)
+                    if (!enabledDevTools)
                     {
-                        componentsInChildren[j].font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-                        componentsInChildren[j].fontSize = 4;
-                        componentsInChildren[j].fontStyle = FontStyle.Bold;
-                        componentsInChildren[j].text = componentsInChildren[j].text.ToLower();
+                        array[i].gameObject.SetActive(false);
                     }
+                    else
+                    {
+                        array[i].gameObject.SetActive(true);
+                        var componentsInChildren = array[i].gameObject.GetComponentsInChildren<UnityEngine.UI.Text>(true);
+                        for (int j = 0; j < componentsInChildren.Length; j++)
+                        {
+                            componentsInChildren[j].font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+                            componentsInChildren[j].fontSize = 4;
+                            componentsInChildren[j].fontStyle = FontStyle.Bold;
+                            componentsInChildren[j].text = componentsInChildren[j].text.ToLower();
+                        }
 #if IL2CPP
                         var iDebugTools = new IDebugTools(array[i].GetComponent("DebugTools").Pointer);
 #else
-                    var iDebugTools = (IDebugTools)(array[i].GetComponent("DebugTools"));
+                        var iDebugTools = (IDebugTools)(array[i].GetComponent("DebugTools"));
 #endif
-                    var cursorSystem = GameObject.FindObjectOfType<CursorSystem>();
-                    if (cursorSystem)
-                        cursorSystem.SetForceVisibleCursor(!iDebugTools.IsOpen());
+                        var cursorSystem = GameObject.FindObjectOfType<CursorSystem>();
+                        if (cursorSystem)
+                            cursorSystem.SetForceVisibleCursor(!iDebugTools.IsOpen());
 
-                    iDebugTools.OpenButtonPressed();
+                        iDebugTools.OpenButtonPressed();
+                    }
                 }
             }
         }
@@ -445,7 +454,7 @@ public class DevToolsHolder : MonoBehaviour
                 Pool.Despawn(boulder, 5f);
             }
         }
-// #endif
+        // #endif
 
         tick = tick + 1;
         if (tick > 60)
@@ -459,6 +468,7 @@ public class DevToolsHolder : MonoBehaviour
                 UpdateObjectsInfo();
         }
     }
+
 
     private void OnGUI()
     {
