@@ -132,7 +132,15 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
                 GamePrefabID.Wall3,
                 GamePrefabID.Wall2,
                 GamePrefabID.Wall1,
-                GamePrefabID.Wall0
+                GamePrefabID.Wall0,
+                GamePrefabID.Castle7,
+                GamePrefabID.Castle6,
+                GamePrefabID.Castle5,
+                GamePrefabID.Castle4,
+                GamePrefabID.Castle3,
+                GamePrefabID.Castle2,
+                GamePrefabID.Castle1,
+                GamePrefabID.Castle0
             };
 
             foreach (var prefabId in prefabIds)
@@ -211,11 +219,20 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
             { GamePrefabID.Tower0, new ModifyData(2, 10, GamePrefabID.Tower2) },
 
             { GamePrefabID.Wall5, new ModifyData(3, 30, GamePrefabID.Invalid, GamePrefabID.Wall3) },
-            { GamePrefabID.Wall4, new ModifyData(3, 30) },
+            { GamePrefabID.Wall4, new ModifyData(2, 20) },
             { GamePrefabID.Wall3, new ModifyData(2, 20, GamePrefabID.Wall5) },
             { GamePrefabID.Wall2, new ModifyData(2, 20, GamePrefabID.Invalid, GamePrefabID.Wall0) },
             { GamePrefabID.Wall1, new ModifyData(1, 10) },
             { GamePrefabID.Wall0, new ModifyData(1, 10, GamePrefabID.Wall2) },
+
+            { GamePrefabID.Castle7, new ModifyData(5, 30) },
+            { GamePrefabID.Castle6, new ModifyData(5, 30, GamePrefabID.Invalid, GamePrefabID.Castle3) },
+            { GamePrefabID.Castle5, new ModifyData(5, 30) },
+            { GamePrefabID.Castle4, new ModifyData(4, 20) },
+            { GamePrefabID.Castle3, new ModifyData(4, 20, GamePrefabID.Castle6 ) },
+            { GamePrefabID.Castle2, new ModifyData(4, 20, GamePrefabID.Invalid, GamePrefabID.Castle0) },
+            { GamePrefabID.Castle1, new ModifyData(3, 10) },
+            { GamePrefabID.Castle0, new ModifyData(3, 10, GamePrefabID.Castle2) },
         };
 
         var prefab = go.GetComponent<PrefabID>();
@@ -272,6 +289,14 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
             case GamePrefabID.Wall2:
             case GamePrefabID.Wall1:
             case GamePrefabID.Wall0:
+            case GamePrefabID.Castle7:
+            case GamePrefabID.Castle6:
+            case GamePrefabID.Castle5:
+            case GamePrefabID.Castle4:
+            case GamePrefabID.Castle3:
+            case GamePrefabID.Castle2:
+            case GamePrefabID.Castle1:
+            case GamePrefabID.Castle0:
                 HandleTower(go, prefabId, isPrefab, modifyBuildPoints);
                 break;
         }

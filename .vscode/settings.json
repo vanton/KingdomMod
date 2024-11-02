@@ -5,6 +5,8 @@
     "cooldown",
     "Despawn",
     "Dont",
-    "Rigidbody"
+    "payables",
+    "Rigidbody",
+    "Teleporter"
   ]
 }
