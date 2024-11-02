@@ -43,17 +43,31 @@ Better pay for upgrades. Adjusted the price of some payable upgrade objects in t
 
 | Level | Name                     | Upgrade Price | Build Time |
 | ----- | ------------------------ | ------------- | ---------- |
-| 0     | monolith                 | 3 => 2        | -          |
-| 1     | Rock Platform -          | 6 => -        | 30 => -    |
-| 2     | Wooden Watchtower        | 9 => 2        | 60 => 20   |
-| 3     | Stone Tower              | 12 => 3       | 90 => 30   |
-| 4     | Triple Tower -           | 15 => -       | 120 => -   |
-| 5     | triple tower with roof   | 18 => 3       | 150 => 30  |
-| 6     | Four Towers              | 18 => 4       | 180 => 30  |
+| 0     | monolith                 | 2             | -          |
+| 1     | Rock Platform -          | -             | -          |
+| 2     | Wooden Watchtower        | 2             | 20         |
+| 3     | Stone Tower              | 3             | 30         |
+| 4     | Triple Tower -           | -             | -          |
+| 5     | triple tower with roof   | 3             | 30         |
+| 6     | Four Towers              | 4             | 30         |
+| 0     | Wall                     | 1             | -          |
+| 1     | Wall -                   | -             | -          |
+| 2     | Wall                     | 2             | 20         |
+| 3     | Wall                     | 2             | 20         |
+| 4     | Wall -                   | -             | -          |
+| 5     | Wall                     | 3             | 30         |
+| 0     | Castle                   | 3             | -          |
+| 1     | Castle -                 | -             | -          |
+| 2     | Castle                   | 4             | 20         |
+| 3     | Castle                   | 4             | 20         |
+| 4     | Castle -                 | -             | -          |
+| 5     | Castle -                 | -             | -          |
+| 6     | Castle                   | 5             | 30         |
+| 7     | Castle                   | 5             | 30         |
 | -     | Citizen Home Recruitment | 5 => 3        | -          |
 | -     | Craft Oil Barrel         | 5 => 3        | -          |
 | -     | making bread             | 4 => 2        | -          |
-| -     | making sword             | 8 => 2        | -          |
+| -     | making sword (Forge)     | 8 => 2        | -          |
 
 - `-` means unavailable or removed.
 - All modes and DLC are now supported.
@@ -65,7 +79,7 @@ Developer tools mod. Contains some functions that are convenient for making MODs
 ### Details
 
 - Some functions seriously affect the game balance, and it is strongly not recommended for ordinary players to use this mod.
-- For balance reasons, all features are only available in `Debug` builds.
+- ~~For balance reasons, all features are only available in `Debug` builds.~~
 
 ### Hotkeys
 
