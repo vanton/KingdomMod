@@ -33,13 +33,13 @@ public partial class OverlayMapHolder : MonoBehaviour
     private static int _land = 0;
     private static int _challengeId = 0;
     private static string _archiveFilename;
-    private static readonly ExploredRegion _exploredRegion = new ();
+    private static readonly ExploredRegion _exploredRegion = new();
     private static PersephoneCage _persephoneCage;
     private static CachePrefabID _cachePrefabID = new CachePrefabID();
 
-    public static void LogMessage(string message, 
+    public static void LogMessage(string message,
         [System.Runtime.CompilerServices.CallerMemberName] string memberName = "",
-        [System.Runtime.CompilerServices.CallerFilePath]   string sourceFilePath = "",
+        [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "",
         [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0)
     {
         log.LogMessage($"[{sourceLineNumber}][{memberName}] {message}");
@@ -111,7 +111,7 @@ public partial class OverlayMapHolder : MonoBehaviour
         //         dict.Add(dictionaryEntry.Key.ToString() ?? "", dictionaryEntry.Value?.ToString() ?? "");
         //         // defines += $"public static ConfigEntry<string> {dictionaryEntry.Key};\r\n";
         //         // binds += $"{dictionaryEntry.Key} = config.Bind(\"Strings\", \"{dictionaryEntry.Key}\", \"{dictionaryEntry.Value}\", \"\");\r\n";
-        //         
+        //
         //         // log.LogMessage($"resSet: {dictionaryEntry.Key}, {dictionaryEntry.Value}");
         //     }
         //
@@ -332,7 +332,7 @@ public partial class OverlayMapHolder : MonoBehaviour
             if (obj.type == Portal.Type.Regular)
                 poiList.Add(new MarkInfo(obj.transform.position.x, MarkerStyle.Portal.Color, MarkerStyle.Portal.Sign, Strings.Portal));
             else if (obj.type == Portal.Type.Cliff)
-                poiList.Add(new MarkInfo(obj.transform.position.x, obj.state switch{ Portal.State.Destroyed => MarkerStyle.PortalCliff.Destroyed.Color, Portal.State.Rebuilding => MarkerStyle.PortalCliff.Rebuilding.Color, _=> MarkerStyle.PortalCliff.Color }, MarkerStyle.PortalCliff.Sign, Strings.PortalCliff));
+                poiList.Add(new MarkInfo(obj.transform.position.x, obj.state switch { Portal.State.Destroyed => MarkerStyle.PortalCliff.Destroyed.Color, Portal.State.Rebuilding => MarkerStyle.PortalCliff.Rebuilding.Color, _ => MarkerStyle.PortalCliff.Color }, MarkerStyle.PortalCliff.Sign, Strings.PortalCliff));
             else if (obj.type == Portal.Type.Dock)
                 poiList.Add(new MarkInfo(obj.transform.position.x, MarkerStyle.PortalDock.Color, MarkerStyle.PortalDock.Sign, Strings.PortalDock));
         }
@@ -362,7 +362,7 @@ public partial class OverlayMapHolder : MonoBehaviour
             }
         }
 
-        foreach (var player in new System.Collections.Generic.List<Player>{ kingdom.playerOne, kingdom.playerTwo })
+        foreach (var player in new System.Collections.Generic.List<Player> { kingdom.playerOne, kingdom.playerTwo })
         {
             if (player == null) continue;
             if (player.isActiveAndEnabled == false) continue;
@@ -470,7 +470,7 @@ public partial class OverlayMapHolder : MonoBehaviour
         }
 
         var campfire = kingdom.campfire;
-        if (campfire !=  null)
+        if (campfire != null)
         {
             poiList.Add(new MarkInfo(campfire.transform.position.x, MarkerStyle.Campfire.Color, MarkerStyle.Campfire.Sign, Strings.Campfire));
         }
@@ -680,6 +680,24 @@ public partial class OverlayMapHolder : MonoBehaviour
             poiList.Add(new MarkInfo(obj.transform.position.x, color, MarkerStyle.HermitCabins.Sign, info, price));
         }
 
+        var hermits = GameExtensions.GetPayablesOfType<Hermit>();
+        foreach (var hermit in hermits)
+        {
+            if (hermit == null) continue;
+            var info = hermit._hermitType switch
+            {
+                Hermit.HermitType.Baker => Strings.HermitBaker,
+                Hermit.HermitType.Ballista => Strings.HermitBallista,
+                Hermit.HermitType.Horn => Strings.HermitHorn,
+                Hermit.HermitType.Horse => Strings.HermitHorse,
+                Hermit.HermitType.Knight => Strings.HermitKnight,
+                Hermit.HermitType.Persephone => Strings.HermitPersephone,
+                Hermit.HermitType.Fire => Strings.HermitFire,
+                _ => LogUnknownHermitType(hermit._hermitType)
+            };
+            poiList.Add(new MarkInfo(hermit.transform.position.x, MarkerStyle.Hermit.Color, MarkerStyle.Hermit.Sign, info, 0, MarkRow.Special));
+        }
+
         if (_persephoneCage)
         {
             var color = PersephoneCage.State.IsPersephoneLocked(_persephoneCage._fsm.Current) ? MarkerStyle.PersephoneCage.Locked.Color : MarkerStyle.PersephoneCage.Unlocked.Color;
@@ -860,7 +878,7 @@ public partial class OverlayMapHolder : MonoBehaviour
         //     poiList.Add(new MarkInfo(mine.transform.position, Color.red, Strings.Mine));
         //     log.LogMessage($"mine prefabID: {mine.GetComponent<PrefabID>().prefabID}");
         // }
-            
+
         // explored area
 
         float wallLeft = Managers.Inst.kingdom.GetBorderSide(Side.Left);
@@ -870,7 +888,7 @@ public partial class OverlayMapHolder : MonoBehaviour
         {
             if (showFullMap)
                 poi.Visible = true;
-            else if(poi.WorldPosX >= _exploredRegion.ExploredLeft && poi.WorldPosX <= _exploredRegion.ExploredRight)
+            else if (poi.WorldPosX >= _exploredRegion.ExploredLeft && poi.WorldPosX <= _exploredRegion.ExploredRight)
                 poi.Visible = true;
             else if (poi.WorldPosX >= wallLeft && poi.WorldPosX <= wallRight)
                 poi.Visible = true;
@@ -900,7 +918,7 @@ public partial class OverlayMapHolder : MonoBehaviour
         {
             poi.Pos = (poi.WorldPosX - startPos) * scale + 16;
         }
-            
+
         minimapMarkList = poiList;
 
         // Make wall lines
@@ -1003,6 +1021,7 @@ public partial class OverlayMapHolder : MonoBehaviour
             {
                 MarkRow.Settled => 24,
                 MarkRow.Movable => 56,
+                MarkRow.Special => 88,
                 _ => throw new ArgumentOutOfRangeException()
             };
 
@@ -1081,7 +1100,7 @@ public partial class OverlayMapHolder : MonoBehaviour
         if (Managers.COOP_ENABLED)
             top = 136 - 56;
 
-        GUI.Label(new Rect(14, top, 60, 20),  Strings.Land + ": " + (Managers.Inst.game.currentLand + 1), guiStyle);
+        GUI.Label(new Rect(14, top, 60, 20), Strings.Land + ": " + (Managers.Inst.game.currentLand + 1), guiStyle);
         GUI.Label(new Rect(14 + 60, top, 60, 20), Strings.Days + ": " + (Managers.Inst.director.CurrentDayForSpawning), guiStyle);
 
         float currentTime = Managers.Inst.director.currentTime;
@@ -1119,7 +1138,8 @@ public partial class OverlayMapHolder : MonoBehaviour
     public enum MarkRow
     {
         Settled = 0,
-        Movable = 1
+        Movable = 1,
+        Special = 2
     }
 
     private class MarkInfo
