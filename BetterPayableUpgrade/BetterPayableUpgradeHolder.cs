@@ -120,6 +120,7 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
                 GamePrefabID.Citizen_House,
                 GamePrefabID.Workshop,
                 GamePrefabID.Tower_Baker,
+                GamePrefabID.Forge,
                 GamePrefabID.Tower6,
                 GamePrefabID.Tower5,
                 GamePrefabID.Tower4,
@@ -210,6 +211,8 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
             { GamePrefabID.Citizen_House, new ModifyData(3) },
             { GamePrefabID.Workshop, new ModifyData(3) },
             { GamePrefabID.Tower_Baker, new ModifyData(2) },
+            { GamePrefabID.Forge, new ModifyData(2) },
+
             { GamePrefabID.Tower6, new ModifyData(4, 30) },
             { GamePrefabID.Tower5, new ModifyData(4, 30, GamePrefabID.Invalid, GamePrefabID.Tower3) },
             { GamePrefabID.Tower4, new ModifyData(3, 20) },
@@ -267,6 +270,7 @@ public class BetterPayableUpgradeHolder : MonoBehaviour
                     break;
                 }
             case GamePrefabID.Tower_Baker:
+            case GamePrefabID.Forge:
                 {
                     var payable = go.GetComponent<PayableShop>();
                     if (payable != null)
