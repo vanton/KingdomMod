@@ -5,31 +5,31 @@
 现已支持合作和在线模式！
 现在同时支持`IL2CPP`和`Mono`版本的游戏了！
 
-* 更好的支付升级 [BetterPayableUpgrade](https://github.com/abevol/KingdomMod#betterpayableupgrade)
-* 开发者工具 [DevTools](https://github.com/abevol/KingdomMod#devtools)
-* 活点地图 [OverlayMap](https://github.com/abevol/KingdomMod#overlaymap)
-* 坐骑耐力条 [StaminaBar](https://github.com/abevol/KingdomMod#staminabar)
+- 更好的支付升级 [BetterPayableUpgrade](https://github.com/vanton/KingdomMod#betterpayableupgrade)
+- 开发者工具 [DevTools](https://github.com/vanton/KingdomMod#devtools)
+- 活点地图 [OverlayMap](https://github.com/vanton/KingdomMod#overlaymap)
+- 坐骑耐力条 [StaminaBar](https://github.com/vanton/KingdomMod#staminabar)
 
 ## 预览
 
-![预览](https://github.com/abevol/KingdomMod/blob/master/preview.png?raw=true)
+![预览](https://github.com/vanton/KingdomMod/blob/master/preview.png?raw=true)
 
 ## 支持的语言
 
-1. [中文](https://github.com/abevol/KingdomMod/blob/master/Readme.zh-CN.md)
-2. [English](https://github.com/abevol/KingdomMod/blob/master/Readme.md)
+1. [中文](https://github.com/vanton/KingdomMod/blob/master/Readme.zh-CN.md)
+2. [English](https://github.com/vanton/KingdomMod/blob/master/Readme.md)
 
 ## 安装
 
 1. 首先确定你的游戏版本是`IL2CPP`版，还是`Mono`版。
-   * `IL2CPP`版，游戏目录中含有文件夹`KingdomTwoCrowns_Data\il2cpp_data`
-   * `Mono`版，游戏目录中含有文件夹`KingdomTwoCrowns_Data\Managed`
+   - `IL2CPP`版，游戏目录中含有文件夹`KingdomTwoCrowns_Data\il2cpp_data`
+   - `Mono`版，游戏目录中含有文件夹`KingdomTwoCrowns_Data\Managed`
 2. 根据您的游戏版本，下载特定版本的模组加载器。将所有文件解压至游戏根目录，确保 `BepInEx` 文件夹和 `winhttp.dll` 等文件与游戏主程序 `KingdomTwoCrowns.exe` 处在同一目录。
-   * `IL2CPP`版，下载 [BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.725](https://builds.bepinex.dev/projects/bepinex_be/725/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.725%2Be1974e2.zip)
-   * `Mono`版，下载 [BepInEx-Unity.Mono-win-x64-6.0.0-be.725](https://builds.bepinex.dev/projects/bepinex_be/725/BepInEx-Unity.Mono-win-x64-6.0.0-be.725%2Be1974e2.zip)
-3. 根据您的游戏版本，下载特定版本的模组。从 [Releases](https://github.com/abevol/KingdomMod/releases) 下载模组文件，将所有文件解压至 `Kingdom Two Crowns\BepInEx\plugins` 目录。
-   * `IL2CPP`版，下载文件名中包含`BIE6_IL2CPP`的模组。
-   * `Mono`版，下载文件名中包含`BIE6_Mono`的模组。
+   - `IL2CPP`版，下载 [BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.725](https://builds.bepinex.dev/projects/bepinex_be/725/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.725%2Be1974e2.zip)
+   - `Mono`版，下载 [BepInEx-Unity.Mono-win-x64-6.0.0-be.725](https://builds.bepinex.dev/projects/bepinex_be/725/BepInEx-Unity.Mono-win-x64-6.0.0-be.725%2Be1974e2.zip)
+3. 根据您的游戏版本，下载特定版本的模组。从 [Releases](https://github.com/vanton/KingdomMod/releases) 下载模组文件，将所有文件解压至 `Kingdom Two Crowns\BepInEx\plugins` 目录。
+   - `IL2CPP`版，下载文件名中包含`BIE6_IL2CPP`的模组。
+   - `Mono`版，下载文件名中包含`BIE6_Mono`的模组。
 4. 现在已完成模组的安装，启动游戏后即可自动加载模组。
 
 ## BetterPayableUpgrade
@@ -38,32 +38,33 @@
 
 ### 调整详情
 
-* 缩小了硬币的体积，现在你的钱袋可以容纳更多硬币了（大约100）。
+- 缩小了硬币的体积，现在你的钱袋可以容纳更多硬币了（大约 100）。
 
-| 等级 | 名称 | 升级价格 | 建造时间 |
-|-----|------|---------|----------|
-|0    |巨石桩| 3 => 2 | - |
-|1    |岩石平台 -| 6 => - | 30 => - |
-|2    |木制瞭望塔| 9 => 5 | 60 => 30 |
-|3    |石塔| 12 => 8 | 90 => 50 |
-|4    |三重塔 -| 15 => - | 120 => - |
-|5    |有屋顶的三重塔| 18 => 12 | 150 => 80 |
-|6    |四重塔| 18 => 16 | 180 => 120 |
-|-    |市民之家招募| 5 => 3 | - |
-|-    |制作油桶| 5 => 3 | - |
-|-    |制作面包| 4 => 2 | - |
+| 等级 | 名称             | 升级价格 | 建造时间  |
+| ---- | ---------------- | -------- | --------- |
+| 0    | 巨石桩           | 3 => 2   | -         |
+| 1    | 岩石平台 -       | 6 => -   | 30 => -   |
+| 2    | 木制瞭望塔       | 9 => 2   | 60 => 10  |
+| 3    | 石塔             | 12 => 3  | 90 => 20  |
+| 4    | 三重塔 -         | 15 => -  | 120 => -  |
+| 5    | 有屋顶的三重塔   | 3 => 12  | 150 => 30 |
+| 6    | 四重塔           | 18 => 4  | 180 => 30 |
+| -    | 市民之家招募     | 5 => 3   | -         |
+| -    | 制作油桶         | 5 => 3   | -         |
+| -    | 制作面包         | 4 => 2   | -         |
+| -    | 制作剑(武装骑士) | 8 => 2   | -         |
 
-* `-` 表示不可用或已移除。
-* 现在已支持所有模式与DLC。
+- `-` 表示不可用或已移除。
+- 现在已支持所有模式与 DLC。
 
 ## DevTools
 
-开发者工具模组。包含一些方便制作MOD的功能。
+开发者工具模组。包含一些方便制作 MOD 的功能。
 
 ### 详情
 
-* 部分功能严重影响游戏平衡，强烈不建议普通玩家使用该模组。
-* 出于平衡性考虑，所有功能仅在`Debug`构建版本中可用。
+- 部分功能严重影响游戏平衡，强烈不建议普通玩家使用该模组。
+- ~~出于平衡性考虑，所有功能仅在`Debug`构建版本中可用。~~
 
 ### 热键
 
@@ -76,8 +77,8 @@
 7. `Delete` 砍伐当前选中的树木
 8. `F1` 添加游民
 9. `F2` 添加格里芬
-10. `F9` 激活游戏开发者调试工具箱
-11. `F10` 将硬币上限设置为1000
+10. `F9` 激活游戏开发者调试工具箱 (修复: 再按一次 F9 可以关闭界面)
+11. `F10` 将硬币上限设置为 1000
 12. `Space` 扔出巨石
 
 ## OverlayMap
@@ -97,30 +98,30 @@
 
 1. `M` 显示地图浮层
 2. `F` 显示完整地图（不建议使用，会降低游戏乐趣）
-3. `F5` 重新加载已保存的游戏 (不用退出游戏): 体验电影蝴蝶效应的乐趣，直到有一天，你把F5错按成了F8(> <)
+3. `F5` 重新加载已保存的游戏 (不用退出游戏): 体验电影蝴蝶效应的乐趣，直到有一天，你把 F5 错按成了 F8(> <)
 4. `F8` 保存游戏 (不用退出游戏)
 
 ### 符号与颜色
 
-| 符号或颜色 | 涵义 |
-|----|----|
-|`♜`|城堡|
-|`۩`|城墙|
-|`∧`|土堆|
-|`≈`|河流|
-|`♣`|浆果丛|
-|$\color{red}{红色}$|未解锁，未攻陷，已损坏|
-|$\color{blue}{蓝色}$|建造中|
-|$\color{green}{绿色}$|已解锁，安全的|
+| 符号或颜色            | 涵义                   |
+| --------------------- | ---------------------- |
+| `♜`                   | 城堡                   |
+| `۩`                   | 城墙                   |
+| `∧`                   | 土堆                   |
+| `≈`                   | 河流                   |
+| `♣`                   | 浆果丛                 |
+| $\color{red}{红色}$   | 未解锁，未攻陷，已损坏 |
+| $\color{blue}{蓝色}$  | 建造中                 |
+| $\color{green}{绿色}$ | 已解锁，安全的         |
 
 ### 自定义风格和语言
 
 现在地图模组已支持自定义风格和语言，您可以在游戏目录`Kingdom Two Crowns\BepInEx\config`找到它们的配置文件。
 
-* `KingdomMod.OverlayMap.cfg`，配置当前使用的语言和风格文件名，
-* `KingdomMod.OverlayMap.Style.cfg`，地图模组的风格文件。您可以修改其中的文本颜色及标记符号。
-* `KingdomMod.OverlayMap.Language.en-US.cfg`，地图模组的语言文件。您可以以该文件为模板制作您的母语语言文件。复制该文件，将文件名的`en-US`部分改为您自己国家/地区的语言代码，比如`KingdomMod.OverlayMap.Language.ru-RU.cfg`，然后对文件内的字符串进行本地化翻译。
-* 欢迎分享您的语言和风格文件：[分享入口](https://github.com/abevol/KingdomMod/issues/3)。
+- `KingdomMod.OverlayMap.cfg`，配置当前使用的语言和风格文件名，
+- `KingdomMod.OverlayMap.Style.cfg`，地图模组的风格文件。您可以修改其中的文本颜色及标记符号。
+- `KingdomMod.OverlayMap.Language.en-US.cfg`，地图模组的语言文件。您可以以该文件为模板制作您的母语语言文件。复制该文件，将文件名的`en-US`部分改为您自己国家/地区的语言代码，比如`KingdomMod.OverlayMap.Language.ru-RU.cfg`，然后对文件内的字符串进行本地化翻译。
+- 欢迎分享您的语言和风格文件：[分享入口](https://github.com/abevol/KingdomMod/issues/3)。
 
 ## StaminaBar
 
@@ -128,13 +129,13 @@
 
 ### 详情
 
-* 蓝色部分表示耐力值，跑步会消耗耐力值，行走和站立会恢复耐力值，站立时恢复耐力值的速度比行走时快很多。
-* 不同坐骑的跑步消耗和奔跑速度不同，该模组通过耐力条的长度来体现它们。
-* 黄色部分表示完全吃饱状态的持续时间，在该状态下行动不会消耗耐力值。
-* 不同坐骑的完全吃饱状态的持续时间不同，该模组通过黄色部分的长度来体现它。
-* 即使不行动，完全吃饱状态的持续时间也会随着时间逐渐减少。
-* 红色部分表示疲劳状态的持续时间，在该状态下不能跑步。
-* 不同坐骑的疲劳状态的持续时间不同。
+- 蓝色部分表示耐力值，跑步会消耗耐力值，行走和站立会恢复耐力值，站立时恢复耐力值的速度比行走时快很多。
+- 不同坐骑的跑步消耗和奔跑速度不同，该模组通过耐力条的长度来体现它们。
+- 黄色部分表示完全吃饱状态的持续时间，在该状态下行动不会消耗耐力值。
+- 不同坐骑的完全吃饱状态的持续时间不同，该模组通过黄色部分的长度来体现它。
+- 即使不行动，完全吃饱状态的持续时间也会随着时间逐渐减少。
+- 红色部分表示疲劳状态的持续时间，在该状态下不能跑步。
+- 不同坐骑的疲劳状态的持续时间不同。
 
 ### 热键
 
