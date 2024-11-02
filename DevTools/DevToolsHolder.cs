@@ -514,6 +514,22 @@ public class DevToolsHolder : MonoBehaviour
             // if (obj.GetComponent<PolygonCollider2D>()) continue;
             if (obj.GetComponent<WorkableTree>()) continue;
 
+            if (obj.GetComponent<Arrow>()) continue;
+            if (obj.GetComponent<Bolt>()) continue;
+            if (obj.GetComponent<Critter>()) continue;
+            if (obj.GetComponent<Enemy>()) continue;
+
+            if (obj.GetComponent<Beggar>()) continue;
+            if (obj.GetComponent<Peasant>()) continue;
+            if (obj.GetComponent<WarriorPeasant>()) continue;
+            if (obj.GetComponent<Berserker>()) continue;
+            if (obj.GetComponent<Archer>()) continue;
+            if (obj.GetComponent<Pikeman>()) continue;
+            if (obj.GetComponent<Ninja>()) continue;
+            if (obj.GetComponent<Knight>()) continue;
+            if (obj.GetComponent<Farmer>()) continue;
+            if (obj.GetComponent<Worker>()) continue;
+
             if (obj.name.StartsWith("Haze")) continue;
             if (obj.name.StartsWith("castle_back")) continue;
 
@@ -538,6 +554,7 @@ public class DevToolsHolder : MonoBehaviour
     private void DrawObjectsInfo()
     {
         guiStyle.normal.textColor = Color.white;
+        
         foreach (var obj in objectsInfoList)
         {
             GUI.Label(obj.Pos, obj.Info, guiStyle);
