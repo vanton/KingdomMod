@@ -47,6 +47,7 @@ public class MarkerStyle
     public static MarkerConfigStated Quarry;
     public static MarkerConfigStated Mine;
     public static MarkerConfigStated RulerSpawns;
+    public static MarkerConfigStated Hermit;
     public static MarkerConfigStated HermitCabins;
     public static MarkerConfigStated PersephoneCage;
     public static MarkerConfig MerchantHouse;
@@ -200,6 +201,9 @@ public class MarkerStyle
         HermitCabins.Locked.Color = config.Bind("HermitCabins.Locked", "Color", "1,0,0,1", "");
         HermitCabins.Unlocked.Color = config.Bind("HermitCabins.Unlocked", "Color", "0,1,0,1", "");
         HermitCabins.Sign = config.Bind("HermitCabins", "Sign", "", "");
+
+        Hermit.Color = config.Bind("Hermit", "Color", "0,1,1,1", "");
+        Hermit.Sign = config.Bind("Hermit", "Sign", "★", "");
 
         PersephoneCage.Locked.Color = config.Bind("PersephoneCage.Locked", "Color", "1,0,0,1", "");
         PersephoneCage.Unlocked.Color = config.Bind("PersephoneCage.Unlocked", "Color", "0,1,0,1", "");
