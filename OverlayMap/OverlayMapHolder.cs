@@ -695,7 +695,18 @@ public partial class OverlayMapHolder : MonoBehaviour
                 Hermit.HermitType.Fire => Strings.HermitFire,
                 _ => LogUnknownHermitType(hermit._hermitType)
             };
-            poiList.Add(new MarkInfo(hermit.transform.position.x, MarkerStyle.Hermit.Color, MarkerStyle.Hermit.Sign, info, 0, MarkRow.Special));
+            var y = hermit._hermitType switch
+            {
+                Hermit.HermitType.Baker => 3,
+                Hermit.HermitType.Ballista => 2,
+                Hermit.HermitType.Horn => 1,
+                Hermit.HermitType.Horse => 0,
+                Hermit.HermitType.Knight => 4,
+                Hermit.HermitType.Persephone => 5,
+                Hermit.HermitType.Fire => 6,
+                _ => 0
+            };
+            poiList.Add(new MarkInfo(hermit.transform.position.x, MarkerStyle.Hermit.Color, MarkerStyle.Hermit.Sign, info, y, MarkRow.Special));
         }
 
         if (_persephoneCage)
@@ -1021,14 +1032,14 @@ public partial class OverlayMapHolder : MonoBehaviour
             {
                 MarkRow.Settled => 24,
                 MarkRow.Movable => 56,
-                MarkRow.Special => 88,
+                MarkRow.Special => 60 + markInfo.Count * 8,
                 _ => throw new ArgumentOutOfRangeException()
             };
 
             if (markInfo.Name != "")
                 GUI.Label(new Rect(markInfo.Pos, namePosY, 0, 20), markName, guiStyle);
 
-            if (markInfo.Count != 0)
+            if (markInfo.Count != 0 && markInfo.NameRow != MarkRow.Special)
                 GUI.Label(new Rect(markInfo.Pos, namePosY + 16, 0, 20), markInfo.Count.ToString(), guiStyle);
 
             // draw self vec.x
