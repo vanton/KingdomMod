@@ -125,6 +125,7 @@ A map mod. It marks points of interest, along with some extra details. There's a
 | `∧`                    | Dirt mound                          |
 | `≈`                    | River                               |
 | `♣`                    | Berry Bush                          |
+| $\color{Cyan}{★}$      | Hermit                              |
 | $\color{red}{Red}$     | Not unlocked, not captured, wrecked |
 | $\color{blue}{Blue}$   | Under construction                  |
 | $\color{green}{Green}$ | Unlocked, safe                      |
