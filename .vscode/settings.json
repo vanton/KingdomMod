@@ -7,6 +7,7 @@
     "Dont",
     "payables",
     "Rigidbody",
-    "Teleporter"
+    "Teleporter",
+    "winhttp"
   ]
 }

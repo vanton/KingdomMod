@@ -116,7 +116,7 @@ A map mod. It marks points of interest, along with some extra details. There's a
 3. `F5` Reload saved game (without exiting game)
 4. `F8` Save game (without exiting game)
 
-## Signs and Colors
+### Signs and Colors
 
 | Signs or Colors        | Meanings                            |
 | ---------------------- | ----------------------------------- |
