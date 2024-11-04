@@ -379,35 +379,39 @@ public class DevToolsHolder : MonoBehaviour
             var array = Resources.FindObjectsOfTypeAll<Transform>();
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i].name == "DebugTools")
+                if (array[i].name != "DebugTools")
                 {
-                    if (!enabledDevTools)
-                    {
-                        array[i].gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        array[i].gameObject.SetActive(true);
-                        var componentsInChildren = array[i].gameObject.GetComponentsInChildren<UnityEngine.UI.Text>(true);
-                        for (int j = 0; j < componentsInChildren.Length; j++)
-                        {
-                            componentsInChildren[j].font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-                            componentsInChildren[j].fontSize = 4;
-                            componentsInChildren[j].fontStyle = FontStyle.Bold;
-                            componentsInChildren[j].text = componentsInChildren[j].text.ToLower();
-                        }
-#if IL2CPP
-                        var iDebugTools = new IDebugTools(array[i].GetComponent("DebugTools").Pointer);
-#else
-                        var iDebugTools = (IDebugTools)(array[i].GetComponent("DebugTools"));
-#endif
-                        var cursorSystem = GameObject.FindObjectOfType<CursorSystem>();
-                        if (cursorSystem)
-                            cursorSystem.SetForceVisibleCursor(!iDebugTools.IsOpen());
-
-                        iDebugTools.OpenButtonPressed();
-                    }
+                    continue;
                 }
+                if (!enabledDevTools)
+                {
+                    array[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    array[i].gameObject.SetActive(true);
+                }
+
+                // componentsInChildren.ForEach(x => log.LogMessage(x.name));
+
+                // var componentsInChildren = array[i].gameObject.GetComponentsInChildren<UnityEngine.UI.Text>(true);
+                // for (int j = 0; j < componentsInChildren.Length; j++)
+                // {
+                //     componentsInChildren[j].font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+                //     componentsInChildren[j].fontSize = 4;
+                //     componentsInChildren[j].fontStyle = FontStyle.Bold;
+                //     componentsInChildren[j].text = componentsInChildren[j].text.ToLower();
+                // }
+#if IL2CPP
+                var iDebugTools = new IDebugTools(array[i].GetComponent("DebugTools").Pointer);
+#else
+                var iDebugTools = (IDebugTools)(array[i].GetComponent("DebugTools"));
+#endif
+                var cursorSystem = GameObject.FindObjectOfType<CursorSystem>();
+                if (cursorSystem)
+                    cursorSystem.SetForceVisibleCursor(!iDebugTools.IsOpen());
+
+                iDebugTools.OpenButtonPressed();
             }
         }
 
@@ -464,11 +468,34 @@ public class DevToolsHolder : MonoBehaviour
         {
             if (!IsPlaying()) return;
 
+            UpdateDevTools();
+
             if (enabledObjectsInfo)
+            {
                 UpdateObjectsInfo();
+            }
         }
     }
 
+    private void UpdateDevTools()
+    {
+        var array = Resources.FindObjectsOfTypeAll<Transform>();
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i].name != "DebugTools")
+            {
+                continue;
+            }
+            var _debugButtons = (DebugTools)array[i].GetComponent("DebugTools");
+            var autoBuildEnabledFlag = ConstructionBuildingComponent.AllAutoBuild && WorkableTree.AutoChopTrees && PayableUpgrade.DebugDisableCooldown;
+            _debugButtons.SetButtonToggleStatus(_debugButtons.autoBuildEnabledButton, autoBuildEnabledFlag);
+            _debugButtons.SetButtonToggleStatus(_debugButtons.infiniteStaminaButton, Player.DebugInfiniteStamina);
+            _debugButtons.SetButtonToggleStatus(_debugButtons.invunerableWallsButton, Wall.InvunerableWalls);
+            _debugButtons.SetButtonToggleStatus(_debugButtons.invulnerableRulersButton, _debugButtons.GetPlayersInvunerable());
+            _debugButtons.SetButtonToggleStatus(_debugButtons.spawningEnabledButton, !Portal.DebugDisableSpawns);
+            _debugButtons.SetButtonToggleStatus(_debugButtons.taxesEnabledButton, !Wallet.DebugDisableTaxes);
+        }
+    }
 
     private void OnGUI()
     {
@@ -554,7 +581,7 @@ public class DevToolsHolder : MonoBehaviour
     private void DrawObjectsInfo()
     {
         guiStyle.normal.textColor = Color.white;
-        
+
         foreach (var obj in objectsInfoList)
         {
             GUI.Label(obj.Pos, obj.Info, guiStyle);
