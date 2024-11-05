@@ -18,6 +18,7 @@ public class Strings
     public static ConfigEntryWrapper<string> Invalid;
     public static ConfigEntryWrapper<string> Beggar;
     public static ConfigEntryWrapper<string> BeggarCamp;
+    public static ConfigEntryWrapper<string> Berserker;
     public static ConfigEntryWrapper<string> Bloodstained;
     public static ConfigEntryWrapper<string> BoarSpawn;
     public static ConfigEntryWrapper<string> Boat;
@@ -67,6 +68,7 @@ public class Strings
     public static ConfigEntryWrapper<string> MerchantHouse;
     public static ConfigEntryWrapper<string> Mine;
     public static ConfigEntryWrapper<string> Miriam;
+    public static ConfigEntryWrapper<string> Ninja;
     public static ConfigEntryWrapper<string> P1;
     public static ConfigEntryWrapper<string> P2;
     public static ConfigEntryWrapper<string> Peasant;
@@ -127,6 +129,7 @@ public class Strings
         Bear = config.Bind("Strings", "Bear", "Bear", "");
         Beggar = config.Bind("Strings", "Beggar", "Beggar", "");
         BeggarCamp = config.Bind("Strings", "BeggarCamp", "Camp", "");
+        Berserker = config.Bind("Strings", "Berserker", "Berserker", "");
         Bloodstained = config.Bind("Strings", "Bloodstained", "Gamigin", "");
         BoarSpawn = config.Bind("Strings", "BoarSpawn", "BoarSpawn", "");
         Boat = config.Bind("Strings", "Boat", "Boat", "");
@@ -176,6 +179,7 @@ public class Strings
         MerchantHouse = config.Bind("Strings", "MerchantHouse", "Merchant", "");
         Mine = config.Bind("Strings", "Mine", "Mine", "");
         Miriam = config.Bind("Strings", "Miriam", "Miriam", "");
+        Ninja = config.Bind("Strings", "Ninja", "Ninja", "");
         P1 = config.Bind("Strings", "P1", "P1", "");
         P2 = config.Bind("Strings", "P2", "P2", "");
         Peasant = config.Bind("Strings", "Peasant", "Peasant", "");

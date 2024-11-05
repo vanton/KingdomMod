@@ -1077,6 +1077,23 @@ public partial class OverlayMapHolder : MonoBehaviour
             maxFarmlands += obj.CurrentMaxFarmlands();
         }
         statsInfo.MaxFarmlands = maxFarmlands;
+
+        switch (BiomeHolder.Inst.BiomeIndex)
+        {
+            case 1:
+                var ninjaList = GameObject.FindGameObjectsWithTag(Tags.Ninja);
+                statsInfo.PikemanCount = ninjaList.Length;
+                statsInfo.PikemanName = Strings.Ninja;
+                break;
+            case 3:
+                statsInfo.PikemanCount = kingdom.Berserkers.Count;
+                statsInfo.PikemanName = Strings.Berserker;
+                break;
+            default:
+                statsInfo.PikemanCount = kingdom.Pikemen.Count;
+                statsInfo.PikemanName = Strings.Pikeman;
+                break;
+        }
     }
 
     private void DrawStatsInfo(int playerId)
@@ -1095,7 +1112,7 @@ public partial class OverlayMapHolder : MonoBehaviour
         GUI.Label(new Rect(14, boxTop + 6 + 20 * 0, 120, 20), Strings.Peasant + ": " + statsInfo.PeasantCount, guiStyle);
         GUI.Label(new Rect(14, boxTop + 6 + 20 * 1, 120, 20), Strings.Worker + ": " + statsInfo.WorkerCount, guiStyle);
         GUI.Label(new Rect(14, boxTop + 6 + 20 * 2, 120, 20), $"{Strings.Archer.Value}: {statsInfo.ArcherCount} ({GameExtensions.GetArcherCount(GameExtensions.ArcherType.Free)}|{GameExtensions.GetArcherCount(GameExtensions.ArcherType.GuardSlot)}|{GameExtensions.GetArcherCount(GameExtensions.ArcherType.KnightSoldier)})", guiStyle);
-        GUI.Label(new Rect(14, boxTop + 6 + 20 * 3, 120, 20), Strings.Pikeman + ": " + kingdom.Pikemen.Count, guiStyle);
+        GUI.Label(new Rect(14, boxTop + 6 + 20 * 3, 120, 20), statsInfo.PikemanName + ": " + statsInfo.PikemanCount, guiStyle);
         GUI.Label(new Rect(14, boxTop + 6 + 20 * 4, 120, 20), $"{Strings.Knight.Value}: {kingdom.Knights.Count} ({GameExtensions.GetKnightCount(true)})", guiStyle);
         GUI.Label(new Rect(14, boxTop + 6 + 20 * 5, 120, 20), Strings.Farmer + ": " + statsInfo.FarmerCount, guiStyle);
         GUI.Label(new Rect(14, boxTop + 6 + 20 * 6, 120, 20), Strings.Farmlands + ": " + statsInfo.MaxFarmlands, guiStyle);
@@ -1182,6 +1199,8 @@ public partial class OverlayMapHolder : MonoBehaviour
         public int ArcherCount;
         public int FarmerCount;
         public int MaxFarmlands;
+        public int PikemanCount;
+        public string PikemanName;
     }
 
     public static string GetBepInExDir()
